@@ -1,0 +1,5 @@
+<extension type="PythonStep">
+    <name>Python step</name>
+    <version>3.10</version>
+    <command>pytest</command>
+</extension>
