@@ -2,6 +2,7 @@ package petuch03.xml2java.javaclassgenerator
 
 import petuch03.xml2java.utils.JavaClassPrintable
 import petuch03.xml2java.utils.XMLExtensionElementModel
+import java.util.*
 
 class JavaClassGeneratorImpl : JavaClassGenerator {
     override fun identifyType(value: String?): String {
@@ -18,16 +19,7 @@ class JavaClassGeneratorImpl : JavaClassGenerator {
         val fields = generateJavaFields(properties)
         val methods = generateJavaMethods(properties)
 
-        val printable =
-            """
-class $className {
-
-$fields
-
-
-$methods
-}
-""".trimIndent()
+        val printable = "class $className {\n\n$fields\n\n\n$methods\n}".trimIndent()
 
         return JavaClassPrintable(className, printable)
     }
@@ -35,11 +27,11 @@ $methods
 
     private fun generateJavaMethods(properties: Map<String, String?>): String {
         fun generateGetter(key: String, type: String): String {
-            return "\tpublic $type get${key.capitalize()}() {\n\t\treturn $key;\n\t}\n\n"
+            return "\tpublic $type get${key.capitalizeFirst()}() {\n\t\treturn $key;\n\t}\n\n"
         }
 
         fun generateSetter(key: String, type: String): String {
-            return "\tpublic void set${key.capitalize()}($type $key) {\n\t\tthis.$key = $key;\n\t}\n\n"
+            return "\tpublic void set${key.capitalizeFirst()}($type $key) {\n\t\tthis.$key = $key;\n\t}\n\n"
         }
 
         return properties.map { (key, value) ->
@@ -54,9 +46,8 @@ $methods
         }.joinToString("\n")
     }
 
-    private fun String.addPrefix(prefix: String, ignoreEmpty: Boolean = true): String {
-        if (this.isEmpty() && ignoreEmpty) return this
-        else if (this.startsWith(prefix)) return this
-        return "$prefix$this"
+    private fun String.capitalizeFirst(): String {
+        return if (this.isEmpty()) this
+        else this.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
     }
 }
