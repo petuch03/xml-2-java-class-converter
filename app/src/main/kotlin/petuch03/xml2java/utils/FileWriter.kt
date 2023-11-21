@@ -6,6 +6,7 @@ class FileWriter {
     fun writeToJavaFile(className: String, content: String, outputPath: String) {
         File(outputPath).delete()
         File("$outputPath/$className.java").writeText(content)
+        println("Result file from current location: $outputPath/$className.java")
     }
 
     fun writeToXMLFile(className: String, content: String, outputPath: String) {

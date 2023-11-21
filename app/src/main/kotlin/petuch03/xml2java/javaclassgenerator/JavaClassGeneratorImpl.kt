@@ -19,7 +19,7 @@ class JavaClassGeneratorImpl : JavaClassGenerator {
         val fields = generateJavaFields(properties)
         val methods = generateJavaMethods(properties)
 
-        val printable = "class $className {\n\n$fields\n\n\n$methods\n}".trimIndent()
+        val printable = "class $className {\n\n$fields\n\n\n$methods\n}\n"
 
         return JavaClassPrintable(className, printable)
     }

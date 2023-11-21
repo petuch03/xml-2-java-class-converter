@@ -20,7 +20,7 @@ class App {
 }
 
 fun main(args: Array<String>) {
-    val argParser = ArgParser("xml-to-java")
+    val argParser = ArgParser("xml-2-java-class-converter")
     val fileInputPath by argParser.option(ArgType.String, shortName = "i", description = "Path to the input XML file").required()
     val fileOutputDir by argParser.option(ArgType.String, shortName = "o", description = "Path to the output directory").required()
     argParser.parse(args)

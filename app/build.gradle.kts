@@ -42,3 +42,15 @@ tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+tasks.named<Jar>("jar") {
+    dependsOn("test")
+
+    manifest {
+        attributes["Main-Class"] = "petuch03.xml2java.AppKt"
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+    archiveFileName.set("app.jar")
+}
