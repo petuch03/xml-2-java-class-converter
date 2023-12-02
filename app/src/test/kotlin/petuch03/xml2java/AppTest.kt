@@ -1,5 +1,7 @@
 package petuch03.xml2java
 
+import petuch03.xml2java.javaclassgenerator.JavaClassGeneratorImpl
+import petuch03.xml2java.utils.JavaType
 import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertEquals
