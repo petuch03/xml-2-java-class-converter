@@ -23,4 +23,24 @@ class AppTest {
 
         assertEquals(expectedOutput.trim(), generatedOutput.trim())
     }
+
+    @Test
+    fun stringConversionTest() {
+        val expectedType = JavaType.STRING
+        assertEquals(expectedType, JavaClassGeneratorImpl().identifyType("12345678a "))
+        assertEquals(expectedType, JavaClassGeneratorImpl().identifyType("3.10"))
+        assertEquals(expectedType, JavaClassGeneratorImpl().identifyType("     "))
+        assertEquals(expectedType, JavaClassGeneratorImpl().identifyType("9 99"))
+        assertEquals(expectedType, JavaClassGeneratorImpl().identifyType("new-york"))
+        assertEquals(expectedType, JavaClassGeneratorImpl().identifyType(",., ., ."))
+    }
+
+    @Test
+    fun intConversionTest() {
+        val expectedType = JavaType.INT
+        assertEquals(expectedType, JavaClassGeneratorImpl().identifyType("111"))
+        assertEquals(expectedType, JavaClassGeneratorImpl().identifyType("3"))
+        assertEquals(expectedType, JavaClassGeneratorImpl().identifyType("-012"))
+        assertEquals(expectedType, JavaClassGeneratorImpl().identifyType("+0"))
+    }
 }
